@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Button from '../Button';
+import Toast from '../Toast';
 
 import styles from './ToastPlayground.module.css';
 
@@ -11,10 +12,15 @@ function ToastPlayground() {
   const [selectedRadioOption, setSelectedRadioOption] = React.useState(
     VARIANT_OPTIONS['notice']
   );
+  const [toastIsOpen, setToastIsOpen] = React.useState(false);
 
   const handleMessageChange = (event) => {
     event.preventDefault();
     setMessage(event.target.value);
+  };
+
+  const handleClick = () => {
+    setToastIsOpen(true);
   };
 
   return (
@@ -24,6 +30,13 @@ function ToastPlayground() {
         <h1>Toast Playground</h1>
       </header>
 
+      {toastIsOpen && (
+        <Toast
+          message={message}
+          variant={selectedRadioOption}
+          setIsOpen={setToastIsOpen}
+        />
+      )}
       <div className={styles.controlsWrapper}>
         <div className={styles.row}>
           <label
@@ -67,7 +80,7 @@ function ToastPlayground() {
         <div className={styles.row}>
           <div className={styles.label} />
           <div className={`${styles.inputWrapper} ${styles.radioWrapper}`}>
-            <Button>Pop Toast!</Button>
+            <Button onClick={handleClick}>Pop Toast!</Button>
           </div>
         </div>
       </div>
