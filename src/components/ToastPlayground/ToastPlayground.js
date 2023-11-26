@@ -8,7 +8,9 @@ const VARIANT_OPTIONS = ['notice', 'warning', 'success', 'error'];
 
 function ToastPlayground() {
   const [message, setMessage] = React.useState('');
-  const [selectedRadioOption, setSelectedRadioOption] = React.useState('');
+  const [selectedRadioOption, setSelectedRadioOption] = React.useState(
+    VARIANT_OPTIONS['notice']
+  );
 
   const handleMessageChange = (event) => {
     event.preventDefault();
