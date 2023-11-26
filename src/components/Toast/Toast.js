@@ -20,16 +20,12 @@ const ICON = {
   error: <AlertOctagon size={ICON_SIZE} />,
 };
 
-function Toast({ message, variant, setIsOpen }) {
-  const handleDismiss = () => {
-    setIsOpen(false);
-  };
-
+function Toast({ id, message, variant, handleDismiss }) {
   return (
     <div className={`${styles.toast} ${styles[variant]}`}>
       <div className={styles.iconContainer}>{ICON[variant]}</div>
       <p className={styles.content}>{message}</p>
-      <button className={styles.closeButton} onClick={handleDismiss}>
+      <button className={styles.closeButton} onClick={() => handleDismiss(id)}>
         <X size={24} />
         <VisuallyHidden>Dismiss message</VisuallyHidden>
       </button>

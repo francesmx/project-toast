@@ -1,17 +1,27 @@
 import React from 'react';
 
 import Toast from '../Toast';
+
 import styles from './ToastShelf.module.css';
 
-function ToastShelf() {
+function ToastShelf({ toastArray, setToastArray }) {
+  const handleDismiss = (id) => {
+    const nextToastArray = toastArray.filter((toast) => toast.id !== id);
+    setToastArray(nextToastArray);
+  };
   return (
     <ol className={styles.wrapper}>
-      <li className={styles.toastWrapper}>
-        <Toast variant="notice">Example notice toast</Toast>
-      </li>
-      <li className={styles.toastWrapper}>
-        <Toast variant="error">Example error toast</Toast>
-      </li>
+      {toastArray.length > 0 &&
+        toastArray.map((toast) => (
+          <li className={styles.toastWrapper} key={toast.id}>
+            <Toast
+              id={toast.id}
+              variant={toast.variant}
+              message={toast.message}
+              handleDismiss={handleDismiss}
+            />
+          </li>
+        ))}
     </ol>
   );
 }
