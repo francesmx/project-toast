@@ -1,7 +1,5 @@
 import React from 'react';
-
 import Toast from '../Toast';
-
 import styles from './ToastShelf.module.css';
 
 function ToastShelf({ toastArray, setToastArray }) {
@@ -9,6 +7,21 @@ function ToastShelf({ toastArray, setToastArray }) {
     const nextToastArray = toastArray.filter((toast) => toast.id !== id);
     setToastArray(nextToastArray);
   };
+
+  React.useEffect(() => {
+    const handleEscapeKeyUp = (event) => {
+      if (event.key === 'Escape') {
+        setToastArray([]);
+      }
+    };
+
+    document.addEventListener('keyup', handleEscapeKeyUp);
+
+    return () => {
+      document.removeEventListener('keyup', handleEscapeKeyUp);
+    };
+  }, [setToastArray]);
+
   return (
     <ol className={styles.wrapper}>
       {toastArray.length > 0 &&
