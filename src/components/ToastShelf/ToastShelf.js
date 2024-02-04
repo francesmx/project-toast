@@ -8,20 +8,6 @@ function ToastShelf({ toastArray, setToastArray }) {
     setToastArray(nextToastArray);
   };
 
-  React.useEffect(() => {
-    const handleEscapeKeyUp = (event) => {
-      if (event.key === 'Escape') {
-        setToastArray([]);
-      }
-    };
-
-    document.addEventListener('keyup', handleEscapeKeyUp);
-
-    return () => {
-      document.removeEventListener('keyup', handleEscapeKeyUp);
-    };
-  }, [setToastArray]);
-
   return (
     <ol
       className={styles.wrapper}

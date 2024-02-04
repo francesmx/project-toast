@@ -1,4 +1,5 @@
 import React from 'react';
+import { useEscapeKey } from '../../hooks';
 
 export const ToastContext = React.createContext();
 
@@ -7,6 +8,11 @@ function ToastProvider({ children }) {
   const [selectedRadioOption, setSelectedRadioOption] =
     React.useState('notice');
   const [toastArray, setToastArray] = React.useState([]);
+
+  const handleEscape = React.useCallback(() => {
+    setToastArray([]);
+  }, []);
+  useEscapeKey(handleEscape);
 
   const handleMessageChange = (event) => {
     setMessage(event.target.value);
